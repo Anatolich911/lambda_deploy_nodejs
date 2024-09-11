@@ -13,7 +13,7 @@ jobs:
       matrix:
         environment: [development, test, staging]
 
-    uses: Anatolich911/lambda_deploy_nodejs/.github/workflows/lambda-deploy-java.yml@main
+    uses: Anatolich911/lambda_deploy_nodejs/.github/workflows/reusable_lambda_nodejs.yml@main
     with:
       role-name: arn:aws:iam::739153323366:role/Role
       function_name: gh_test
