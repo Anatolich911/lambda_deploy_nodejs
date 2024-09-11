@@ -29,7 +29,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          java-version-file: .java-version
+          java-version-file: 20
           distribution: 'temurin'
           cache: maven
 
