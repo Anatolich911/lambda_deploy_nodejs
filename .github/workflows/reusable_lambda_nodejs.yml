@@ -12,7 +12,7 @@ jobs:
       matrix:
         environment: [development, test, staging]
 
-    uses: ./.github/workflows/reusable_lambda_nodejs.yml
+    uses: ./.github/workflows/lambda_deploy.yml
     with:
       role-name: arn:aws:iam::739153323366:role/Role
       function_name: gh_test
