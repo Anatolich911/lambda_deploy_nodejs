@@ -26,12 +26,10 @@ jobs:
       - name: Checkout Repo  
         uses: actions/checkout@v4
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
+      - name: Use Node.js 12.0
+        uses: actions/setup-node@v1
         with:
-          java-version-file: .java-version
-          distribution: 'temurin'
-          cache: maven
+          node-version: '12.0'
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -39,15 +37,13 @@ jobs:
           role-to-assume: ${{ inputs.role-name }}
           aws-region: us-east-1
 
-      - name: Build
-        run: mvn clean install -DskipTests
 
-      - name: Zip Lambda functions
-        run: zip -r function.zip target/*.jar
-
-      - name: Deploy Lambda function
-        run: |
-          aws lambda update-function-code \
-            --function-name ${{ inputs.function-name }}-${{inputs.environment}}
-            --zip-file fileb://function.zip
-            --publish.
+      - name: serverless deploy
+        uses: 
+        with:
+          args: deploy. --stage ${{ inputs.environment }}
+        env:
+        # SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+        # or if using AWS credentials directly
+          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
