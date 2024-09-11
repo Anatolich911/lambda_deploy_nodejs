@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      matrix:
+        environment: [development, test, staging]
+
+    uses: Anatolich911/lambda_deploy_nodejs/.github/workflows/lambda-deploy-java.yml@main
+    with:
+      role-name: arn:aws:iam::739153323366:role/Role
+      function_name: gh_test
+      environment: ${{ matrix.environment }}
