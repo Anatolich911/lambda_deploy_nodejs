@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  call-workflow:
     permissions:
       id-token: write
       contents: read
