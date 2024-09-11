@@ -15,5 +15,5 @@ jobs:
     uses: ./.github/workflows/lambda_deploy.yml
     with:
       role-name: arn:aws:iam::739153323366:role/Role
-      function-name: gh_test
+      function-name: lets_go
       environment: ${{ matrix.environment }}
